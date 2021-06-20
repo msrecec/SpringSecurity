@@ -26,13 +26,6 @@ public class StudentManagementController {
         return STUDENTS;
     }
 
-    @RequestMapping(value="/csrf-token", method=RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
-    public @ResponseBody String getCsrfToken(HttpServletRequest request) {
-        CsrfToken token = (CsrfToken)request.getAttribute(CsrfToken.class.getName());
-        return token.getToken();
-    }
-
     @PostMapping
     @PreAuthorize("hasAuthority('student:write')")
     public void registerNewStudent(@RequestBody Student student) {
