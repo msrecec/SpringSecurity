@@ -1,8 +1,10 @@
 package com.example.demo.student;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +24,13 @@ public class StudentManagementController {
     public List<Student> getAllStudents() {
         System.out.println("getAllStudents");
         return STUDENTS;
+    }
+
+    @RequestMapping(value="/csrf-token", method=RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
+    public @ResponseBody String getCsrfToken(HttpServletRequest request) {
+        CsrfToken token = (CsrfToken)request.getAttribute(CsrfToken.class.getName());
+        return token.getToken();
     }
 
     @PostMapping
