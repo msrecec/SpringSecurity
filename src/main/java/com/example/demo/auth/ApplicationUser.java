@@ -5,10 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class ApplicationUser implements UserDetails {
 
-    private final List<? extends GrantedAuthority> grantedAuthorities;
+    private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
     private final String username;
     private final boolean isAccountNonExpired;
@@ -17,9 +18,10 @@ public class ApplicationUser implements UserDetails {
     private final boolean isEnabled;
 
 
-    public ApplicationUser(List<? extends GrantedAuthority> grantedAuthorities,
-                           String password,
+    public ApplicationUser(
                            String username,
+                           String password,
+                           Set<? extends GrantedAuthority> grantedAuthorities,
                            boolean isAccountNonExpired,
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
