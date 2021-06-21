@@ -1,5 +1,7 @@
 package com.example.demo.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +12,8 @@ public class ApplicationUserService implements UserDetailsService {
 
     private final ApplicationUserDAO applicationUserDAO;
 
-    public ApplicationUserService(ApplicationUserDAO applicationUserDAO) {
+    @Autowired
+    public ApplicationUserService(@Qualifier("fake") ApplicationUserDAO applicationUserDAO) {
         this.applicationUserDAO = applicationUserDAO;
     }
 
